@@ -49,6 +49,18 @@ class Movie
   end
 
 
+  def customers()
+
+    sql = "SELECT *
+          FROM tickets
+          WHERE movie_id = $1;"
+    values = [@id]
+    audience = SqlRunner.run( sql, values )
+    return audience.count
+
+  end
+
+
   def delete()
     sql = "DELETE FROM movies
           WHERE id = $1"
