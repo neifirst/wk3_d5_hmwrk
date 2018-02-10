@@ -36,6 +36,19 @@ class Customer
 
   end
 
+
+  def tickets()
+
+    sql = "SELECT *
+          FROM tickets
+          WHERE customer_id = $1;"
+    values = [@id]
+    tickets = SqlRunner.run( sql, values )
+    return tickets.count
+
+  end
+
+
   def update()
     sql = "UPDATE customers
           SET (name, funds) = ($1, $2)
