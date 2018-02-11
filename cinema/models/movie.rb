@@ -20,22 +20,8 @@ class Movie
           VALUES ($1, $2)
           RETURNING id"
     values = [@title, @price]
-    movie = SqlRunner.run( sql, values ).first
+    movie = SqlRunner.run(sql, values).first
     @id = movie['id'].to_i
-  end
-
-
-  def customers()
-
-    sql = "SELECT customers.*
-          FROM customers
-          INNER JOIN tickets
-          ON customers.id = tickets.customer_id
-          WHERE movie_id = $1;"
-    values = [@id]
-    customers = SqlRunner.run( sql, values )
-    return customers.map {|customer| Customer.new(customer)}
-
   end
 
 
@@ -49,13 +35,35 @@ class Movie
   end
 
 
+  def delete()
+    sql = "DELETE FROM movies
+          WHERE id = $1"
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
+
+
+  def audience_details()
+
+    sql = "SELECT customers.*
+          FROM customers
+          INNER JOIN tickets
+          ON customers.id = tickets.customer_id
+          WHERE movie_id = $1;"
+    values = [@id]
+    customers = SqlRunner.run(sql, values)
+    return customers.map {|customer| Customer.new(customer)}
+
+  end
+
+
   def audience_size()
 
     sql = "SELECT *
           FROM tickets
           WHERE movie_id = $1;"
     values = [@id]
-    audience = SqlRunner.run( sql, values )
+    audience = SqlRunner.run(sql, values)
     return audience.count
 
   end
@@ -67,13 +75,13 @@ class Movie
           FROM screenings
           WHERE movie_id = $1;"
     values = [@id]
-    screenings = SqlRunner.run( sql, values )
+    screenings = SqlRunner.run(sql, values)
     return screenings.map {|screening| Screening.new(screening)}
 
   end
 
 
-  def most_pop()
+  def most_pop_screening()
 
     sql = "SELECT tickets.screening_id
           FROM tickets
@@ -102,21 +110,12 @@ class Movie
   end
 
 
-  def delete()
-    sql = "DELETE FROM movies
-          WHERE id = $1"
-    values = [@id]
-    SqlRunner.run(sql, values)
-  end
-
-
-
   def self.all()
     sql = "SELECT *
           FROM movies"
     values = []
     movies = SqlRunner.run(sql, values)
-    result = movies.map { |movies| Movie.new( movie ) }
+    result = movies.map {|movies| Movie.new( movie )}
     return result
   end
 

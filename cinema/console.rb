@@ -1,7 +1,7 @@
-require_relative( 'models/movie' )
-require_relative( 'models/customer' )
-require_relative( 'models/ticket' )
-require_relative( 'models/screening' )
+require_relative('models/movie')
+require_relative('models/customer')
+require_relative('models/ticket')
+require_relative('models/screening')
 
 require( 'pry-byebug' )
 
@@ -10,11 +10,11 @@ Ticket.delete_all()
 Customer.delete_all()
 Movie.delete_all()
 
-movie1 = Movie.new({'title' => 'Dark City', 'price' => 8 })
+movie1 = Movie.new({'title' => 'Dark City', 'price' => 8})
 movie1.save()
-movie2 = Movie.new({ 'title' => 'The Thing', 'price' => 8 })
+movie2 = Movie.new({'title' => 'The Thing', 'price' => 8})
 movie2.save()
-movie3 = Movie.new({ 'title' => 'Leon', 'price' => 8 })
+movie3 = Movie.new({'title' => 'Leon', 'price' => 8})
 movie3.save()
 
 
@@ -32,31 +32,31 @@ screening6 = Screening.new({'movie_id' => movie3.id, 'screen_time' => '17:45', '
 screening6.save
 
 
-customer1 = Customer.new({ 'name' => 'Jeniffer', 'funds' => 20})
+customer1 = Customer.new({'name' => 'Jeniffer', 'funds' => 20})
 customer1.save()
-customer2 = Customer.new({ 'name' => 'Kieffer', 'funds' => 27})
+customer2 = Customer.new({'name' => 'Kieffer', 'funds' => 27})
 customer2.save()
-customer3 = Customer.new({ 'name' => 'Kurt', 'funds' => 9})
+customer3 = Customer.new({'name' => 'Kurt', 'funds' => 9})
 customer3.save()
-customer4 = Customer.new({ 'name' => 'Donald', 'funds' => 12})
+customer4 = Customer.new({'name' => 'Donald', 'funds' => 12})
 customer4.save()
-customer5 = Customer.new({ 'name' => 'Jean', 'funds' => 42})
+customer5 = Customer.new({'name' => 'Jean', 'funds' => 42})
 customer5.save()
-customer6 = Customer.new({ 'name' => 'Gary', 'funds' => 50})
+customer6 = Customer.new({'name' => 'Gary', 'funds' => 50})
 customer6.save()
 
 
-ticket1 = Ticket.new({ 'movie_id' => movie1.id, 'customer_id' => customer1.id, 'screening_id' => screening1.id})
+ticket1 = Ticket.new({'movie_id' => movie1.id, 'customer_id' => customer1.id, 'screening_id' => screening1.id})
 ticket1.save() if screening1.check_availability()
-ticket2 = Ticket.new({ 'movie_id' => movie1.id, 'customer_id' => customer2.id, 'screening_id' => screening2.id})
+ticket2 = Ticket.new({'movie_id' => movie1.id, 'customer_id' => customer2.id, 'screening_id' => screening2.id})
 ticket2.save() if screening2.check_availability()
-ticket3 = Ticket.new({ 'movie_id' => movie1.id, 'customer_id' => customer3.id, 'screening_id' => screening2.id})
+ticket3 = Ticket.new({'movie_id' => movie1.id, 'customer_id' => customer3.id, 'screening_id' => screening2.id})
 ticket3.save() if screening2.check_availability()
-ticket4 = Ticket.new({ 'movie_id' => movie2.id, 'customer_id' => customer4.id, 'screening_id' => screening3.id})
+ticket4 = Ticket.new({'movie_id' => movie2.id, 'customer_id' => customer4.id, 'screening_id' => screening3.id})
 ticket4.save() if screening3.check_availability()
-ticket5 = Ticket.new({ 'movie_id' => movie3.id, 'customer_id' => customer1.id, 'screening_id' => screening5.id})
+ticket5 = Ticket.new({'movie_id' => movie3.id, 'customer_id' => customer1.id, 'screening_id' => screening5.id})
 ticket5.save() if screening5.check_availability()
-ticket6 = Ticket.new({ 'movie_id' => movie3.id, 'customer_id' => customer6.id, 'screening_id' => screening5.id})
+ticket6 = Ticket.new({'movie_id' => movie3.id, 'customer_id' => customer6.id, 'screening_id' => screening5.id})
 ticket6.save() if screening5.check_availability()
 
 
