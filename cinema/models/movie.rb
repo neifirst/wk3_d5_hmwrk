@@ -73,6 +73,35 @@ class Movie
   end
 
 
+  def most_pop()
+
+    sql = "SELECT tickets.screening_id
+          FROM tickets
+          WHERE tickets.movie_id = $1;"
+    values = [@id]
+    found = (SqlRunner.run(sql, values)).uniq
+    times = found.map {|x| x["screening_id"].to_i}
+
+    count = 1
+    quantity = []
+
+    while count <= times.length
+
+      sql = "SELECT tickets.screening_id
+            FROM tickets
+            WHERE tickets.movie_id = $1 AND tickets.screening_id = $2;"
+      values = [@id, count]
+      result = (SqlRunner.run(sql, values))
+      quantity << result.to_a
+      count += 1
+
+    end
+
+    return (quantity.max_by {|array| array.length}).uniq
+
+  end
+
+
   def delete()
     sql = "DELETE FROM movies
           WHERE id = $1"
