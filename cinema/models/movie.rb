@@ -79,8 +79,8 @@ class Movie
           FROM tickets
           WHERE tickets.movie_id = $1;"
     values = [@id]
-    found = (SqlRunner.run(sql, values)).uniq
-    times = found.map {|x| x["screening_id"].to_i}
+    result = (SqlRunner.run(sql, values)).uniq
+    times = result.map {|x| x["screening_id"].to_i}
 
     count = 1
     quantity = []

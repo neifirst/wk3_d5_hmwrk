@@ -13,8 +13,8 @@ class Ticket
   end
 
 
-
   def save()
+    
     sql = "INSERT INTO tickets(movie_id, customer_id, screening_id)
           VALUES($1, $2, $3)
           RETURNING id"
