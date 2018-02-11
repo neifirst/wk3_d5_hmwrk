@@ -52,6 +52,7 @@ class Screening
     return true if amount[0] > 0
 
   end
+  
 
   def self.all()
     sql = "SELECT *

@@ -110,6 +110,35 @@ class Movie
   end
 
 
+  def least_pop_screening()
+
+    sql = "SELECT tickets.screening_id
+          FROM tickets
+          WHERE tickets.movie_id = $1;"
+    values = [@id]
+    result = (SqlRunner.run(sql, values)).uniq
+    times = result.map {|x| x["screening_id"].to_i}
+
+    count = 1
+    quantity = []
+
+    while count <= times.length
+
+      sql = "SELECT tickets.screening_id
+            FROM tickets
+            WHERE tickets.movie_id = $1 AND tickets.screening_id = $2;"
+      values = [@id, count]
+      result = (SqlRunner.run(sql, values))
+      quantity << result.to_a
+      count += 1
+
+    end
+
+    return (quantity.min_by {|array| array.length}).uniq
+
+  end
+
+
   def self.all()
     sql = "SELECT *
           FROM movies"
