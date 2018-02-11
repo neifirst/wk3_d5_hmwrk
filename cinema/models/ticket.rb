@@ -14,13 +14,20 @@ class Ticket
 
 
   def save()
-    
+
     sql = "INSERT INTO tickets(movie_id, customer_id, screening_id)
           VALUES($1, $2, $3)
           RETURNING id"
     values = [@movie_id, @customer_id, @screening_id]
     ticket = SqlRunner.run( sql,values ).first
     @id = ticket['id'].to_i
+
+    sql = "UPDATE screenings
+          SET tickets_left = (tickets_left - $1)
+          WHERE screenings.id = $2"
+    values = [1, @screening_id]
+    SqlRunner.run( sql,values )
+
   end
 
 
