@@ -21,6 +21,7 @@ class Screening
     screening = SqlRunner.run( sql,values ).first
     @id = screening['id'].to_i
   end
+  
 
   def check_availability()
 

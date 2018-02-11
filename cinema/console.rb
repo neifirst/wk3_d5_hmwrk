@@ -18,7 +18,7 @@ movie3 = Movie.new({ 'title' => 'Leon', 'price' => 8 })
 movie3.save()
 
 
-screening1 = Screening.new({'movie_id' => movie1.id, 'screen_time' => '11:00', 'tickets_left' => 49})
+screening1 = Screening.new({'movie_id' => movie1.id, 'screen_time' => '11:00', 'tickets_left' => 48})
 screening1.save
 screening2 = Screening.new({'movie_id' => movie1.id, 'screen_time' => '16:00', 'tickets_left' => 48})
 screening2.save
@@ -47,17 +47,17 @@ customer6.save()
 
 
 ticket1 = Ticket.new({ 'movie_id' => movie1.id, 'customer_id' => customer1.id, 'screening_id' => screening1.id})
-ticket1.save()
+ticket1.save() if screening1.check_availability()
 ticket2 = Ticket.new({ 'movie_id' => movie1.id, 'customer_id' => customer2.id, 'screening_id' => screening2.id})
-ticket2.save()
+ticket2.save() if screening2.check_availability()
 ticket3 = Ticket.new({ 'movie_id' => movie1.id, 'customer_id' => customer3.id, 'screening_id' => screening2.id})
-ticket3.save()
+ticket3.save() if screening2.check_availability()
 ticket4 = Ticket.new({ 'movie_id' => movie2.id, 'customer_id' => customer4.id, 'screening_id' => screening3.id})
-ticket4.save()
+ticket4.save() if screening3.check_availability()
 ticket5 = Ticket.new({ 'movie_id' => movie3.id, 'customer_id' => customer1.id, 'screening_id' => screening5.id})
-ticket5.save()
+ticket5.save() if screening5.check_availability()
 ticket6 = Ticket.new({ 'movie_id' => movie3.id, 'customer_id' => customer6.id, 'screening_id' => screening5.id})
-ticket6.save()
+ticket6.save() if screening5.check_availability()
 
 
 
